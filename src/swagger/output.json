@@ -1,0 +1,190 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Digital Department API",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "paths": {
+    "/sign-in": {
+      "post": {
+        "description": "Authentication",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/sign-up": {
+      "post": {
+        "description": "Registration",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/edit": {
+      "put": {
+        "description": "Edit your account",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/EditAccountReqBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {
+    "Todo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "text": {
+          "type": "string",
+          "example": "test"
+        },
+        "done": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "Todos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Todo"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "role": {
+          "type": "number",
+          "example": 0
+        },
+        "name": {
+          "type": "string",
+          "example": "Name"
+        },
+        "login": {
+          "type": "string",
+          "example": "login"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@kai.ru"
+        },
+        "birthDate": {
+          "type": "string",
+          "example": "2000-02-02T15:00:00Z"
+        },
+        "gender": {
+          "type": "string",
+          "example": "female"
+        },
+        "canPublish": {
+          "type": "boolean",
+          "example": true
+        },
+        "creationDate": {
+          "type": "string",
+          "example": "2022-11-11T15:00:00Z"
+        }
+      }
+    },
+    "EditAccountReqBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Name"
+        },
+        "login": {
+          "type": "string",
+          "example": "login"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@kai.ru"
+        },
+        "birthDate": {
+          "type": "string",
+          "example": "2000-02-02T15:00:00Z"
+        },
+        "gender": {
+          "type": "string",
+          "example": "female"
+        },
+        "career": {
+          "type": "string",
+          "example": "university"
+        },
+        "post": {
+          "type": "string",
+          "example": "engineer"
+        }
+      }
+    },
+    "SignInResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "token": {
+          "type": "string",
+          "example": "Bearer token"
+        }
+      }
+    }
+  }
+}

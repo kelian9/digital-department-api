@@ -81,19 +81,23 @@ class AccountService {
             }
 
             req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync());
-
+            req.body.gender = !req.body.gender ? 'female' : 'male';
             Users.createUser(req.body)
                 .then((result) => res.status(200).end())
                 .catch((err: any) => {
-                    if ((err.detail as any).includes('Key (email)=') && (err.detail as any).includes(' already exists.')) {
-                        res.status(400).json(new ErrorResponse(400, '', 'User with that email already exists.'));
-                        return;
-                    }
-                    if (
-                        (err.detail as any).includes('Key (login)=') || (err.detail as any).includes('Key (password)=')
-                        && (err.detail as any).includes(' already exists.')
-                    ) {
-                        res.status(400).json(new ErrorResponse(400, '', 'This login or password already exists.'));
+                    if (err.detail) {
+                        if ((err.detail as any).includes('Key (email)=') && (err.detail as any).includes(' already exists.')) {
+                            res.status(400).json(new ErrorResponse(400, '', 'User with that email already exists.'));
+                            return;
+                        }
+                        if (
+                            (err.detail as any).includes('Key (login)=') || (err.detail as any).includes('Key (password)=')
+                            && (err.detail as any).includes(' already exists.')
+                        ) {
+                            res.status(400).json(new ErrorResponse(400, '', 'This login or password already exists.'));
+                            return;
+                        }
+                        res.status(400).json(new ErrorResponse(400, '', err.detail));
                         return;
                     }
                     res.status(500).json(new ErrorResponse(500, '', err))

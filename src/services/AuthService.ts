@@ -6,6 +6,7 @@ class AuthService {
     constructor() {}
 
     public static authorize(req:Request, res: Response, next: NextFunction) {
+        console.log(req.headers.authorization);
         if (req.headers.authorization) {
             let tokenParts = req.headers.authorization
                 .split(' ')[1]
