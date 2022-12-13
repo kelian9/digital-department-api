@@ -20,6 +20,30 @@
     }
   },
   "paths": {
+    "/download/{filePath}/{fileName}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "filePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/sign-in": {
       "post": {
         "description": "Authentication",
@@ -70,6 +94,61 @@
     },
     "/": {
       "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/publications/filter": {
+      "get": {
+        "description": "Get publications",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Publications" }
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "Get publications",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/create": {
+      "post": {
+        "description": "Create publication",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/update-status": {
+      "put": {
         "description": "",
         "parameters": [],
         "responses": {}
@@ -184,6 +263,164 @@
           "type": "string",
           "example": "Bearer token"
         }
+      }
+    },
+    "SignInReqBody": {
+      "type": "object",
+      "properties": {
+        "login": {
+          "type": "string",
+          "example": "string"
+        },
+        "password": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "SignUpReqBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "string"
+        },
+        "login": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "password": {
+          "type": "string",
+          "example": "string"
+        },
+        "birthDate": {
+          "type": "string",
+          "example": "31.08.2001T12:00:00"
+        },
+        "gender": {
+          "type": "number",
+          "example": 0
+        },
+        "career": {
+          "type": "string",
+          "example": "string"
+        },
+        "post": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Author": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Subject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Publication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "userId": {
+          "type": "number",
+          "example": 1
+        },
+        "type": {
+          "type": "number",
+          "example": 0
+        },
+        "status": {
+          "type": "number",
+          "example": 1
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "review": {
+          "type": "string",
+          "example": "string"
+        },
+        "coverPath": {
+          "type": "string",
+          "example": "string"
+        },
+        "filePath": {
+          "type": "string",
+          "example": "string"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Author"
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subject"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "releaseDate": {
+          "type": "string",
+          "example": "'19.02.1968T12:00:00"
+        },
+        "creationDate": {
+          "type": "string",
+          "example": "19.11.2022T12:00:00"
+        }
+      }
+    },
+    "Publications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Publication"
       }
     }
   }

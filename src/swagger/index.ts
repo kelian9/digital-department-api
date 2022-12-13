@@ -1,5 +1,4 @@
 import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
 import swaggerAutogen from 'swagger-autogen';
 
 const _dirname = dirname(join(__dirname, '/swagger'));
@@ -49,6 +48,50 @@ const doc = {
         user: { $ref: '#/definitions/User' },
         token: 'Bearer token',
       },
+      SignInReqBody: {
+        login: 'string',
+        password: 'string',
+      },
+      SignUpReqBody: {
+        name: 'string',
+        login: 'string',
+        email: 'string',
+        password: 'string',
+        birthDate: '31.08.2001T12:00:00',
+        gender: 0,
+        career: 'string',
+        post: 'string',
+      },
+      Author: {
+        id: 1,
+        name: 'string',
+      },
+      Subject: {
+        id: 1,
+        name: 'string',
+      },
+      Tag: {
+        id: 1,
+        name: 'string',
+      },
+      Publication: {        
+        id: 1,
+        userId: 1,
+        type: 0,
+        status: 1,
+        title: 'string',
+        review: 'string',
+        coverPath: 'string',
+        filePath: 'string',
+        authors: [{ $ref: '#/definitions/Author' }],
+        subjects: [{ $ref: '#/definitions/Subject' }],
+        tags: [{ $ref: '#/definitions/Tag' }],
+        releaseDate: '19.02.1968T12:00:00',
+        creationDate: '19.02.1968T12:00:00'
+      },
+      Publications: [{
+        $ref: '#/definitions/Publication'
+      }]
     },
     host: 'localhost:3000',
     schemes: ['http'],
@@ -70,6 +113,7 @@ const routersPaths = [
     '../index.ts',
     '../controllers/accountController/index.ts',
     '../controllers/usersController/index.ts',
+    '../controllers/publicationsController/index.ts',
 ];
 const getEndpoints = () => {
     return routersPaths.map((path) => join(_dirname, path));

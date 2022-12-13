@@ -39,15 +39,16 @@ class AccountService {
                 return res.status(200).json({
                     user: {
                         id: user.id,
+                        role: user.role,
                         name: user.name,
                         login: user.login,
                         email: user.email,
-                        birthDate: user.birthDate,
+                        birthDate: user.birthdate,
                         gender: user.gender,
                         career: user.career,
                         post: user.post,
-                        canPublish: user.canPublish,
-                        creationDate: user.creationDate,
+                        canPublish: user.canpublish,
+                        creationDate: user.creationdate,
                     },
                     token: `${head}.${body}.${signature}`,
                 });

@@ -11,9 +11,8 @@ accountController.post('/sign-in', (req:Request, res: Response, next: NextFuncti
     // #swagger.description = 'Authentication'
     /* #swagger.responses['200'] = {
         // описание ответа
-        'description': 'authorize',
-        // схема ответа - ссылка на модель
-        'schema': { $ref: '#/definitions/SignInResponse' }
+        description: 'authorize',
+        schema: { $ref: "#/definitions/SignInResponse" }
     } */
 });
 accountController.post('/sign-up', (req:Request, res: Response, next: NextFunction) => {
@@ -27,7 +26,7 @@ accountController.post('/sign-up', (req:Request, res: Response, next: NextFuncti
 
     AccountService.signUp(req, res)
 });
-accountController.use('/edit', AuthService.authorize);
+accountController.use('/edit', AuthService.requireAuthorize);
 accountController.put('/edit', (req:Request, res: Response, next: NextFunction) => {
     // #swagger.description = 'Edit your account'
     /* #swagger.requestBody = {
