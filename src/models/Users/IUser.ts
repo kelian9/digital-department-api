@@ -5,12 +5,12 @@ interface IUser {
     login: string;
     password: string;
     email: string;
-    birthDate: string | Date;
+    birthdate: string | Date;
     gender: boolean;
     career: string;
     post: string;
-    canPublish: boolean;
-    creationDate: Date | string;
+    canpublish: boolean;
+    creationdate: Date | string;
 }
 
 export interface IUserAccount {
